@@ -84,6 +84,10 @@
                                     });
                                 }
                             }
+                            
+                        }
+                        else {
+                            form.find('ul.errorlist').remove();
                         }
                     },
                     type: 'POST',
