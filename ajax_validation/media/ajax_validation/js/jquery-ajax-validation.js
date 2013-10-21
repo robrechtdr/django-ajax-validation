@@ -12,7 +12,8 @@
             callback: false,
             fields: false,
             dom: this,
-            event: 'submit'
+            event: 'submit',
+            on_success: false
         }, settings);
         
         return this.each(function() {
@@ -88,6 +89,9 @@
                         }
                         else {
                             form.find('ul.errorlist').remove();
+                        }
+                        if (settings.on_success){
+                            settings.on_success();
                         }
                     },
                     type: 'POST',

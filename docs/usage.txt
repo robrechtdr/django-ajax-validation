@@ -30,7 +30,7 @@ And then in the template in which you are displaying the form, you should add::
     {% include_validation %}
     <script type="text/javascript">
         $(function()    {
-            $('#form').validate('{% url contact_form_validate %}', {type: 'ul', fields: ['email'], dom: $('#id_email'), event: 'keyup'});
+            $('#form').validate('{% url contact_form_validate %}', {type: 'ul', fields: ['email'], dom: $('#id_email'), event: 'keyup', on_success: my_callback});
             $('#form').validate('{% url contact_form_validate %}', {type: 'ul'});
         });
     </script>
@@ -45,9 +45,11 @@ etc.), the default is table if nothing is provided.  It can also take a callback
 option which is a function that recieves data, which is the JSON representation 
 of any errors, and form, which is the jquery object that you provided.  Finally, 
 it takes fields, which is a list of the fields that should be validated, it will 
-not display errors that aren't in that list of fields.  The last 2 options are 
+not display errors that aren't in that list of fields.  Then there are the options 
 dom and event, these allow you to choose when the validation will occur, dom 
 should be a jQuery object(i.e.: $('#my_field')), and event should be a jQuery 
-event(listed `here`_).
+event(listed `here`_). Ultimately you are also able to pass another callback that
+will be executed after the response from the server to the ajax validation request 
+is processed.
 
 .. _here: http://docs.jquery.com/Events/bind#overview
