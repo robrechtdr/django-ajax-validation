@@ -13,7 +13,8 @@
             fields: false,
             dom: this,
             event: 'submit',
-            on_success: false
+            on_success: false,
+            on_valid: false 
         }, settings);
         
         return this.each(function() {
@@ -89,9 +90,13 @@
                         }
                         else {
                             form.find('ul.errorlist').remove();
+                            if (settings.on_valid){
+                                settings.on_valid();
+                            }
                         }
                         if (settings.on_success){
                             settings.on_success();
+
                         }
                     },
                     type: 'POST',
