@@ -22,7 +22,23 @@
             settings.dom.bind(settings.event, function()  {
                 var params = {};
                 form_data(form).each(function() {
-                    params[ this.name || this.id || this.parentNode.name || this.parentNode.id ] = this.value; 
+                    if (this.type === "radio"){
+                        var $checkedDepthOne = $(this).parent().siblings().find(":checked");
+                        var $checkedDepthTwo = $(this).parent().parent().siblings().find(":checked");
+                        if (this.checked){
+                            formElemValue = this.value;
+                        }
+                        else if ($checkedDepthOne.length !== 0){
+                            formElemValue = $checkedDepthOne.prop("value"); 
+                        }
+                        else if ($checkedDepthTwo.length !== 0){
+                            formElemValue = $checkedDepthTwo.prop("value"); 
+                        }
+                    }
+                    else {
+                        formElemValue = this.value;
+                    }
+                    params[ this.name || this.id || this.parentNode.name || this.parentNode.id ] = formElemValue;
                 });
                 
                 var status = false;
