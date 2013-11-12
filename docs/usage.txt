@@ -31,7 +31,7 @@ And then in the template in which you are displaying the form, you should add::
     <script type="text/javascript">
         $(function()    {
             $('#form').validate('{% url contact_form_validate %}', {type: 'ul', fields: ['email'], dom: $('#id_email'), 
-              event: 'keyup', onSuccess: myCallback, onValid: otherCallback});
+              event: 'keyup', onValid: myCallback, onNonValid: myOtherCallback});
             $('#form').validate('{% url contact_form_validate %}', {type: 'ul'});
         });
     </script>
@@ -47,11 +47,11 @@ option which is a function that recieves data, which is the JSON representation
 of any errors, and form, which is the jquery object that you provided.  Finally, 
 it takes fields, which is a list of the fields that should be validated, it will 
 not display errors that aren't in that list of fields.  Then there are the options 
-dom, event, onSuccess and onValid. dom and event allow you to choose when 
+dom, event, onValid and onNonValid. dom and event allow you to choose when 
 the validation will occur, dom should be a jQuery object(i.e.: $('#my_field')), 
 and event should be a jQuery event(listed `here`_). 
-onSuccess allows you to pass a callback that is executed after 
-each successful ajax request(this is regardless if the form is valid or not).
-onValid allows you to pass a callback that is executed when the form is valid.
+onValid allows you to pass an additional callback that is executed when the form 
+is valid. onNonValid allows you to pass an additional callback that is executed 
+when the form is non-valid. 
 
 .. _here: http://docs.jquery.com/Events/bind#overview

@@ -14,7 +14,8 @@
             dom: this,
             event: 'submit',
             onSuccess: false,
-            onValid: false 
+            onValid: false,
+            onNonValid: false
         }, settings);
         
         return this.each(function() {
@@ -102,7 +103,9 @@
                                     });
                                 }
                             }
-                            
+                            if (settings.onNonValid){
+                                settings.onNonValid();
+                            }
                         }
                         else {
                             form.find('ul.errorlist').remove();
